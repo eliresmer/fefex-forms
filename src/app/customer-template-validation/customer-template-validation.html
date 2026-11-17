@@ -61,13 +61,57 @@
                 }
 
                 <label for="">Address</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" [(ngModel)]="customer.address" required email minlength="2" name="address" #address="ngModel">
+                @if(address?.touched || address?.dirty || customerForm.submitted) {
+                    @if(address?.errors?.['required']) {
+                        <div class="err text-danger">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                                Address is required
+                        </div>
+                    }
+                    @if(address?.errors?.['minlength']) {
+                        <div class="err text-danger">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                                Requires length: 2 or greater
+                        </div>
+                    }
+                }
+                
 
                 <label for="">Date of birth</label>
-                <input type="date" class="form-control" [(ngModel)]="customer.dob">
+                <input type="date" class="form-control" [(ngModel)]="customer.dob" name="dob" required #dob="ngModel">
+                @if(dob?.touched || address?.dirty || customerForm.submitted) {
+                    @if(dob?.errors?.['required']) {
+                        <div class="err text-danger">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                                DOB is required
+                        </div>
+                    }
+                    @if(dob?.errors?.['minlength']) {
+                        <div class="err text-danger">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                                Requires length: 2 or greater
+                        </div>
+                    }
+                }
 
                 <label for="">SSN</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" 
+                required [(ngModel)]="customer.ssn" name="ssn" #ssn="ngModel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}">
+                @if(ssn?.touched || address?.dirty || customerForm.submitted) {
+                    @if(ssn?.errors?.['required']) {
+                        <div class="err text-danger">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                                SSN is required
+                        </div>
+                    }
+                    @if(ssn?.errors?.['pattern']) {
+                        <div class="err text-danger">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                                Not a valid SSN
+                        </div>
+                    }
+                }
 
                 <h4 class="mt-2"></h4>
                 <div class="card-footer">
